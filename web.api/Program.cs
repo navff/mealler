@@ -27,11 +27,10 @@ namespace web.api
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseKestrel()
-                        .UseUrls("http://*:"+port, "https://*:5556")
+                        .UseUrls("http://*:" + port)
                         .UseContentRoot(Directory.GetCurrentDirectory())
                         .UseConfiguration(config);
                 });
         }
-            
     }
 }
