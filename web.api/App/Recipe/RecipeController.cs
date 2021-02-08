@@ -14,8 +14,8 @@ namespace web.api.App.Recipe
             {
                 new()
                 {
-                    Description = "This is description v2",
-                    Name = "This is name v2"
+                    Description = "This is description v3 develop",
+                    Name = "This is name v3 develop"
                 }
             };
         } 
