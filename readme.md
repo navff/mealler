@@ -1,7 +1,8 @@
 ﻿## Docker & Heroku
 
-Ля ля ля
+Развёртывание
 ![](https://dev.to/alrobilliard/deploying-net-core-to-heroku-1lfe)
+![](https://upplabs.com/blog/free-net-core-hosting-on-heroku-through-docker-and-github-guide-for-startups/)
 
 ```
 docker build -t mealler .
