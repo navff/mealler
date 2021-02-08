@@ -7,6 +7,10 @@ namespace web.api.App.Recipe
     [Route("[controller]")]
     public class RecipeController
     {
+        /// <summary>
+        /// Very good controller
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Recipe> Get()
         {

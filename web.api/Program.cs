@@ -20,7 +20,7 @@ namespace web.api
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var port = Environment.GetEnvironmentVariable("PORT");
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "5555";
             var config = new ConfigurationBuilder().AddCommandLine(args).Build();
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
