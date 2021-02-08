@@ -27,7 +27,7 @@ namespace web.api
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseKestrel()
-                        .UseUrls("http://*:"+port)
+                        .UseUrls("http://*:"+port, "https://*:5556")
                         .UseContentRoot(Directory.GetCurrentDirectory())
                         .UseConfiguration(config);
                 });

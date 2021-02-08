@@ -27,17 +27,14 @@ namespace web.api.Helpings
                 
             });
             
+            // Register DbContext
+            AppDbContext.Register(services);
+            
             // BUSINESS SERVICES
              // services.AddTransient<DaDataService>();
 
             // CONTROLLERS
             // services.AddTransient<DivisionsController>();
-            
-            // OTHERS
-            services.AddDbContext<AppDbContext>(opt => 
-                opt.UseSqlite(SqliteConfigBuilder.GetConnection()),
-                ServiceLifetime.Transient);
-            
         }
         
     }

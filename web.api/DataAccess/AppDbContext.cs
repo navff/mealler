@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.DependencyInjection;
 using web.api.App.Recipe;
 
 namespace web.api.DataAccess
@@ -14,6 +15,7 @@ namespace web.api.DataAccess
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
             lock (Locker)
             {
                 Database.Migrate();
@@ -32,6 +34,19 @@ namespace web.api.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+        }
+        
+        public static void Register(IServiceCollection services)
+        {
+            services.AddDbContext<AppDbContext>(opt => 
+                    opt.UseSqlite(SqliteConfigBuilder.GetConnection()),
+                ServiceLifetime.Transient);
+            
+            var context = services.BuildServiceProvider()
+                .GetService<AppDbContext>();
+            
+            var seeder = new Seeder(context);
+            seeder.Seed();
         }
     }
 }
