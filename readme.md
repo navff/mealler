@@ -11,9 +11,12 @@ heroku container:release -a mealler web
 heroku logs
 ```
 
-
-
 ## Docker locally
+
 ```
 docker run -d -p 8080:80 --name mealler1 mealler
 ```
+
+## SQLite limitations
+
+https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations
