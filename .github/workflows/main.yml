@@ -1,6 +1,7 @@
 on: 
   push:
     branches:
+      - develop
       - master
       - release/*
 name: Deploy to Heroku
