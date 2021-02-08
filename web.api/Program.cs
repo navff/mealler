@@ -20,16 +20,16 @@ namespace web.api
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
+            var port = Environment.GetEnvironmentVariable("PORT");
             var config = new ConfigurationBuilder().AddCommandLine(args).Build();
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseKestrel()
+                        .UseUrls("http://*:"+port)
                         .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseConfiguration(config)
-                        .UseIISIntegration()
-                        .UseIIS();
+                        .UseConfiguration(config);
                 });
         }
             

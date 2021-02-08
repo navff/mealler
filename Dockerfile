@@ -15,10 +15,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# Run the app on container startup
-# Use your project name for the second parameter
-# e.g. MyProject.dll
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://*:8080
-USER root
-ENTRYPOINT [ "dotnet", "web.api.dll" ]
+# comment this if you need Production mode
+ENV ASPNETCORE_ENVIRONMENT Development
+
+# web.api.dll — name of my api-project dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet web.api.dll
