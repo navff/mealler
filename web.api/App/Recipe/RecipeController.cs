@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using web.api.App.Common;
 using web.api.DataAccess;
 
 namespace web.api.App.Recipe
@@ -9,46 +14,43 @@ namespace web.api.App.Recipe
     [Route("[controller]")]
     public class RecipeController
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
+        private readonly IMediator _mediator;
 
-        public RecipeController(AppDbContext context)
+        public RecipeController(AppDbContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
-        /// <summary>
-        /// Very good controller
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IEnumerable<Recipe> Get()
+        [HttpGet("{Id}", Name = "Get")]
+        public RecipeResponse Get([FromRoute] GetRecipeQuery query)
         {
-            return new List<Recipe>()
-            {
-                new()
-                {
-                    Description = "This is description v4 develop",
-                    Name = "This is name v4 develop"
-                }
-            };
+            if (query.Id == 0) throw new ArgumentException("No Id!", nameof(query.Id));
+            var result = _mediator.Send(query).Result;
+            return result;
+        }
+/*
+        [HttpGet("{id}")]
+        public RecipeResponse Get(int id)
+        {
+            var query = new GetRecipeQuery{ Id = id};
+            var result = _mediator.Send(query).Result;
+            return result;
         } 
-        
+*/
+
         [HttpGet("all")]
         public IEnumerable<Recipe> GetAll()
         {
-            return _context.Recipes.ToList();
+            return _context.Recipes.OrderBy("Description asc").ToList();
         }
-        
+
         [HttpPost]
-        public IActionResult Post()
+        public async Task<EntityCreatedResult> Post([FromBody] AddRecipeCommand command)
         {
-            _context.Recipes.Add(new Recipe
-            {
-                Description = "This is desc",
-                Name = "This is name"
-            });
-            _context.SaveChanges();
-            return new OkResult();
-        } 
+            var result = _mediator.Send(command).Result;
+            return result;
+        }
     }
 }

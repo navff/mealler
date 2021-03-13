@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using web.api.Helpings;
 
 namespace web.api
@@ -28,8 +23,10 @@ namespace web.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
             DiMapper.Map(services);
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Latest)
+                .ConfigureApiBehaviorOptions(options => { options.SuppressInferBindingSourcesForParameters = true; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
