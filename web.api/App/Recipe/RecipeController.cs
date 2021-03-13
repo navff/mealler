@@ -23,22 +23,13 @@ namespace web.api.App.Recipe
             _mediator = mediator;
         }
 
-        [HttpGet("{Id}", Name = "Get")]
-        public RecipeResponse Get([FromRoute] GetRecipeQuery query)
+        [HttpGet("{id:int}")]
+        public RecipeResponse Get(GetRecipeQuery query)
         {
             if (query.Id == 0) throw new ArgumentException("No Id!", nameof(query.Id));
             var result = _mediator.Send(query).Result;
             return result;
         }
-/*
-        [HttpGet("{id}")]
-        public RecipeResponse Get(int id)
-        {
-            var query = new GetRecipeQuery{ Id = id};
-            var result = _mediator.Send(query).Result;
-            return result;
-        } 
-*/
 
         [HttpGet("all")]
         public IEnumerable<Recipe> GetAll()
