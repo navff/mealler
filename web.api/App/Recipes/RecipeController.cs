@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using web.api.App.Common;
+using web.api.App.Recipes.Commands;
 using web.api.DataAccess;
 
-namespace web.api.App.Recipe
+namespace web.api.App.Recipes
 {
     [ApiController]
     [Route("[controller]")]

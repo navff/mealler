@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using web.api.App.Common;
 
-namespace web.api.App.Recipe
+namespace web.api.App.Recipes.Commands
 {
     public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, EntityCreatedResult>
     {

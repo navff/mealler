@@ -1,5 +1,7 @@
 ﻿using System.Linq;
-using web.api.App.Recipe;
+using web.api.App.Recipes;
+using web.api.App.Teams;
+using web.api.App.Users;
 
 namespace web.api.DataAccess
 {
@@ -17,6 +19,51 @@ namespace web.api.DataAccess
         {
             // Recipes
             AddRecipes();
+        }
+
+        private void AddUsers()
+        {
+            var petya = new User
+            {
+                Name = "Petya (Team Admin)",
+                Email = "petya@petya-team.com"
+            };
+
+            var vasya = new User
+            {
+                Name = "Vasya (Team member)",
+                Email = "masya@petya-team.com"
+            };
+
+            var tanya = new User
+            {
+                Name = "Tanya (Team member)",
+                Email = "tanya@petya-team.com"
+            };
+
+            var vova = new User
+            {
+                Name = "Vova (Team admin and member",
+                Email = "Var@33kita.ru"
+            };
+
+            // Teams
+            var petyaTeam = new Team
+            {
+                Name = "PetyaTeam",
+                Owner = petya,
+                Members = {tanya, vasya, vova}
+            };
+
+            var vovaTeam = new Team
+            {
+                Name = "VovaTeam",
+                Owner = vova,
+                Members = {tanya, vasya}
+            };
+
+            _context.Teams.Add(petyaTeam);
+            _context.Teams.Add(vovaTeam);
         }
 
         private void AddRecipes()

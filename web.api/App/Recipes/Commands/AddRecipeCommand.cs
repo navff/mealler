@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using web.api.App.Common;
 
-namespace web.api.App.Recipe
+namespace web.api.App.Recipes.Commands
 {
     public class AddRecipeCommand : IRequest<EntityCreatedResult>
     {

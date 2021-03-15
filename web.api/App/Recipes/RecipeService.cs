@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using web.api.DataAccess;
 
-namespace web.api.App.Recipe
+namespace web.api.App.Recipes
 {
     public class RecipeService
     {

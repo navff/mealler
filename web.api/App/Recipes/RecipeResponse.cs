@@ -1,4 +1,4 @@
-﻿namespace web.api.App.Recipe
+﻿namespace web.api.App.Recipes
 {
     public class RecipeResponse
     {

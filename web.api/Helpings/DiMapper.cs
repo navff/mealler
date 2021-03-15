@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using web.api.App.Recipe;
+using web.api.App.Recipes;
 using web.api.DataAccess;
 
 namespace web.api.Helpings
