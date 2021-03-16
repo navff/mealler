@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +34,7 @@ namespace web.api.App.Recipes
         [HttpGet("all")]
         public IEnumerable<Recipe> GetAll()
         {
-            return _context.Recipes.OrderBy("Description asc").ToList();
+            return _context.Recipes.OrderBy(r => r.Name).ToList();
         }
 
         [HttpPost]
