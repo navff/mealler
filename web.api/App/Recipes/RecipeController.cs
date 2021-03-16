@@ -25,10 +25,10 @@ namespace web.api.App.Recipes
         }
 
         [HttpGet("{id:int}")]
-        public RecipeResponse Get(GetRecipeQuery query)
+        public async Task<RecipeResponse> Get(GetRecipeQuery query)
         {
             if (query.Id == 0) throw new ArgumentException("No Id!", nameof(query.Id));
-            var result = _mediator.Send(query).Result;
+            var result = await _mediator.Send(query);
             return result;
         }
 
@@ -41,7 +41,7 @@ namespace web.api.App.Recipes
         [HttpPost]
         public async Task<EntityCreatedResult> Post([FromBody] AddRecipeCommand command)
         {
-            var result = _mediator.Send(command).Result;
+            var result = await _mediator.Send(command);
             return result;
         }
     }

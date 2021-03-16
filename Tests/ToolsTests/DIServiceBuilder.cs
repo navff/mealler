@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using web.api.Helpings;
 
 namespace Tests.ToolsTests
 {
@@ -24,7 +25,7 @@ namespace Tests.ToolsTests
         private IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureServices(services => { TestDiMapper.Map(services); });
+                .ConfigureServices(services => { DiMapper.Map(services); });
         }
     }
 }

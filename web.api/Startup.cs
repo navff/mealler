@@ -1,5 +1,3 @@
-using System.Reflection;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +22,6 @@ namespace web.api
         {
             services.AddControllers();
             DiMapper.Map(services);
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
             services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .ConfigureApiBehaviorOptions(options => { options.SuppressInferBindingSourcesForParameters = true; });
         }

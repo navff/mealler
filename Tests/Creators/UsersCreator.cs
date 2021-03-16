@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using web.api.App.Users;
 using web.api.DataAccess;
@@ -25,9 +24,22 @@ namespace Tests.Creators
             return user;
         }
 
-        public Task<IEnumerable<User>> CreateMany(int count)
+        public async Task<List<User>> CreateMany(int count)
         {
-            throw new NotImplementedException();
+            var createdUsers = new List<User>();
+            for (var i = 0; i < count; i++)
+            {
+                var user = new User
+                {
+                    Email = $"user{i}@lololol-hohoho.com",
+                    Name = $"user{i}"
+                };
+                createdUsers.Add(user);
+            }
+
+            await _context.Users.AddRangeAsync(createdUsers);
+            await _context.SaveChangesAsync();
+            return createdUsers;
         }
     }
 }

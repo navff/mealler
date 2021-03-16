@@ -2,6 +2,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
+using Common.Config;
+using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using web.api.App.Recipes;
@@ -12,10 +15,9 @@ namespace web.api.Helpings
     [ExcludeFromCodeCoverage]
     public static class DiMapper
     {
-        public static void Map(IServiceCollection services)
+        public static void Map(IServiceCollection services, bool testing = false)
         {
             // SERVICES
-            AutoMapperConfigBuilder.RegisterAutoMapper(services, new MappingProfile());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "web.api", Version = "v1"});
@@ -24,16 +26,19 @@ namespace web.api.Helpings
                 c.IncludeXmlComments(xmlPath);
                 c.DescribeAllParametersInCamelCase();
             });
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
+            // CONFIGURATION
+            var configuration = ConfigHelper.GetIConfigurationRoot(Directory.GetCurrentDirectory());
+            services.AddSingleton<IConfiguration>(configuration);
             // Register DbContext
             AppDbContext.Register(services);
 
             // BUSINESS SERVICES
             services.AddTransient<RecipeService>();
-            // services.AddTransient<DaDataService>();
 
             // CONTROLLERS
-            // services.AddTransient<DivisionsController>();
+            services.AddTransient<RecipeController>();
         }
     }
 }

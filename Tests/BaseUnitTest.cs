@@ -1,5 +1,4 @@
 ﻿using Tests.Creators;
-using Tests.ToolsTests;
 using web.api.DataAccess;
 
 namespace Tests
@@ -11,10 +10,8 @@ namespace Tests
 
         public BaseUnitTest()
         {
-            // must be the first because it initialises DB Context
             _creator = new Creator();
-            var diServiceBuilder = new DIServiceBuilder();
-            _context = diServiceBuilder.GetService<AppDbContext>();
+            _context ??= _creator.GetContext();
         }
     }
 }

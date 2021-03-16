@@ -6,6 +6,6 @@ namespace Tests.Creators
     public interface ICreator<T>
     {
         public Task<T> CreateOne();
-        public Task<IEnumerable<T>> CreateMany(int count);
+        public Task<List<T>> CreateMany(int count);
     }
 }

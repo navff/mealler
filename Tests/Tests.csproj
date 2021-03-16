@@ -24,8 +24,4 @@
         <ProjectReference Include="..\web.api\web.api.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Teams"/>
-    </ItemGroup>
-
 </Project>

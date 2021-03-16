@@ -18,7 +18,7 @@ namespace web.api.DataAccess
         public void Seed()
         {
             // Recipes
-            AddRecipes();
+            // AddRecipes();
         }
 
         private void AddUsers()

@@ -10,12 +10,11 @@ namespace web.api.DataAccess
 {
     public sealed class AppDbContext : DbContext
     {
-        private static readonly object Locker = new object();
+        private static readonly object Locker = new();
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
             lock (Locker)
             {
                 Database.Migrate();

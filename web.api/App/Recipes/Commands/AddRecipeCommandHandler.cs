@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Mapster;
 using MediatR;
 using web.api.App.Common;
 
@@ -17,11 +18,8 @@ namespace web.api.App.Recipes.Commands
 
         public async Task<EntityCreatedResult> Handle(AddRecipeCommand request, CancellationToken cancellationToken)
         {
-            var resultRecipe = await _recipeService.Add(new Recipe
-            {
-                Description = request.Description,
-                Name = request.Name
-            });
+            var recipeModel = request.Adapt<Recipe>();
+            var resultRecipe = await _recipeService.Add(recipeModel);
 
             return new EntityCreatedResult
             {
